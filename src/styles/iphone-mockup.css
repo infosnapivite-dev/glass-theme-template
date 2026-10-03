@@ -1,0 +1,387 @@
+:root {
+  --desk-spotlight-1: rgba(197, 160, 89, 0.16);
+  --desk-spotlight-2: rgba(128, 27, 38, 0.14);
+  --desk-bg-1: #1a1519;
+  --desk-bg-2: #100b0f;
+  --desk-bg-3: #070406;
+  --desk-dot-color: rgba(197, 160, 89, 0.18);
+  --desk-aura-core: rgba(197, 160, 89, 0.3);
+  --desk-aura-mid: rgba(128, 27, 38, 0.2);
+  --desk-aura-outer: rgba(26, 54, 54, 0.15);
+}
+
+/* Outer Desktop Stage Container */
+.desktop-viewport-container {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 601px) {
+  html, body, #root {
+    background-color: #0E0D0C !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+  }
+
+  .desktop-viewport-container {
+    perspective: 1400px;
+    perspective-origin: center center;
+  }
+
+  /* Ambient Glow Aura Behind Phone */
+  .desktop-viewport-container::before {
+    content: '';
+    position: absolute;
+    width: 580px;
+    height: 780px;
+    border-radius: 50%;
+    background: radial-gradient(
+      ellipse at center,
+      var(--desk-aura-core) 0%,
+      var(--desk-aura-mid) 35%,
+      var(--desk-aura-outer) 60%,
+      transparent 75%
+    );
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(52px);
+    pointer-events: none;
+    z-index: 1;
+    animation: desktopAuraBreath 7s ease-in-out infinite alternate;
+  }
+
+  /* Starlight Lattice Dot Grid */
+  .desktop-viewport-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(var(--desk-dot-color) 1px, transparent 1px),
+      radial-gradient(var(--desk-dot-color) 1px, transparent 1px);
+    background-size: 36px 36px;
+    background-position: 0 0, 18px 18px;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @keyframes desktopAuraBreath {
+    0% { opacity: 0.75; transform: translate(-50%, -50%) scale(0.94); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+  }
+
+  /* iPhone Chassis Dimensions (Precision Scaled) */
+  .iphone-wrapper {
+    --zoom: 1.22;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(70.6mm * var(--zoom));
+    height: calc(146.6mm * var(--zoom));
+    max-width: calc(100vw - 32px);
+    max-height: calc(100dvh - 32px);
+    aspect-ratio: 70.6 / 146.6;
+    transform-origin: center center;
+    overflow: visible !important;
+    z-index: 10;
+  }
+
+  /* Brushed Titanium Hardware Buttons */
+  .btn-hardware {
+    position: absolute;
+    z-index: 25;
+    pointer-events: none;
+  }
+
+  .btn-action, .btn-vol-up, .btn-vol-down {
+    left: -3.8px;
+    width: 3.8px;
+    border-radius: 2.5px 0 0 2.5px;
+    background: linear-gradient(180deg, #827a81 0%, #4e474d 18%, #2d272c 50%, #4e474d 82%, #827a81 100%);
+    box-shadow: inset 0.8px 1px 1px rgba(255, 255, 255, 0.45), inset 0 -1px 1px rgba(0, 0, 0, 0.9), -2px 0 4px rgba(0, 0, 0, 0.65);
+    border-left: 0.5px solid rgba(255, 255, 255, 0.25);
+  }
+  .btn-action { top: 15.5%; height: 3.6%; }
+  .btn-vol-up { top: 22.5%; height: 6.6%; }
+  .btn-vol-down { top: 31.2%; height: 6.6%; }
+
+  .btn-power {
+    right: -3.8px;
+    top: 24.5%;
+    width: 3.8px;
+    height: 9.8%;
+    border-radius: 0 2.5px 2.5px 0;
+    background: linear-gradient(180deg, #827a81 0%, #4e474d 18%, #2d272c 50%, #4e474d 82%, #827a81 100%);
+    box-shadow: inset -0.8px 1px 1px rgba(255, 255, 255, 0.45), inset 0 -1px 1px rgba(0, 0, 0, 0.9), 2px 0 4px rgba(0, 0, 0, 0.65);
+    border-right: 0.5px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .btn-camera-control {
+    right: -2.8px;
+    top: 68.5%;
+    width: 2.8px;
+    height: 7.2%;
+    border-radius: 0 2px 2px 0;
+    background: linear-gradient(180deg, #595257 0%, #352f34 30%, #1f1a1e 70%, #595257 100%);
+    box-shadow: inset -0.5px 0.5px 0.5px rgba(255, 255, 255, 0.3), inset 0 -0.5px 0.5px rgba(0, 0, 0, 0.9), 1px 0 3px rgba(0, 0, 0, 0.5);
+    border-right: 0.5px solid rgba(255, 255, 255, 0.15);
+  }
+
+  /* Main iPhone Frame Bezels */
+  .iphone-device-frame {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: calc(12mm * var(--zoom, 1.22));
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow:
+      0 0 0 1px #786f77,
+      0 0 0 3.5px #2b242a,
+      0 0 0 5px #151014,
+      0 32px 75px -14px rgba(0, 0, 0, 0.95),
+      0 10px 28px rgba(0, 0, 0, 0.7),
+      0 0 55px rgba(212, 175, 55, 0.16);
+    border: 3px solid #000;
+  }
+
+  /* Dynamic Island Notch */
+  .iphone-notch {
+    position: absolute;
+    top: calc(2.8mm * var(--zoom, 1.22));
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(23mm * var(--zoom, 1.22));
+    height: calc(6.2mm * var(--zoom, 1.22));
+    background: #000;
+    border-radius: calc(3.2mm * var(--zoom, 1.22));
+    z-index: 999;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 calc(2mm * var(--zoom, 1.22));
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8), inset 0 0 1px rgba(255, 255, 255, 0.15);
+  }
+
+  .notch-lens {
+    width: calc(2.4mm * var(--zoom, 1.22));
+    height: calc(2.4mm * var(--zoom, 1.22));
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #182848, #050b18 70%);
+    box-shadow: inset 0 0 1.5px rgba(255, 255, 255, 0.4);
+    position: relative;
+  }
+  .notch-lens::after {
+    content: '';
+    position: absolute;
+    top: 0.5px;
+    left: 0.5px;
+    width: calc(0.7mm * var(--zoom, 1.22));
+    height: calc(0.7mm * var(--zoom, 1.22));
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+  }
+
+  .notch-sensor {
+    width: calc(1.8mm * var(--zoom, 1.22));
+    height: calc(1.8mm * var(--zoom, 1.22));
+    border-radius: 50%;
+    background: #0d0812;
+    box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Inner App Containers */
+.inner-app-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.inner-app-scroll {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  background-color: transparent;
+}
+
+.inner-app-scroll::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS (Seamless Fullscreen on Actual Phones <= 600px)
+   ========================================================================== */
+@media (max-width: 600px) {
+  .desktop-viewport-container::before,
+  .desktop-viewport-container::after {
+    display: none;
+  }
+
+  html, body, #root {
+    background-color: #FAF7F2 !important;
+    overflow-x: hidden !important;
+  }
+
+  .desktop-viewport-container {
+    height: auto !important;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-y: visible !important;
+    background: #FAF7F2 !important;
+  }
+
+  .iphone-wrapper,
+  .iphone-device-frame {
+    width: 100vw;
+    max-width: 430px;
+    margin: 0 auto;
+    height: auto !important;
+    min-height: 100vh;
+    min-height: 100dvh;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent;
+    transform: none !important;
+  }
+
+  .btn-hardware,
+  .iphone-notch {
+    display: none !important;
+  }
+
+  .inner-app-container,
+  .inner-app-scroll {
+    overflow: visible !important;
+    height: auto !important;
+    max-width: 430px;
+    margin: 0 auto;
+  }
+
+  /* --------------------------------------------------------------------------
+     MOBILE-ONLY TYPOGRAPHY SCALING (Applied ONLY on mobile screens <= 600px)
+     -------------------------------------------------------------------------- */
+  .mobile-tagline {
+    font-size: 14px !important;
+  }
+  .mobile-names-serif {
+    font-size: 36px !important;
+  }
+  .mobile-names-amp {
+    font-size: 48px !important;
+  }
+  .mobile-header-script {
+    font-size: 70px !important;
+    line-height: 1.02 !important;
+  }
+  .mobile-header-caps {
+    font-size: 34px !important;
+  }
+  .mobile-body-p1 {
+    font-size: 15.5px !important;
+    line-height: 1.7 !important;
+  }
+  .mobile-body-p2 {
+    font-size: 14.8px !important;
+    line-height: 1.7 !important;
+  }
+  .mobile-body-box {
+    max-width: 275px !important;
+  }
+  .mobile-date {
+    font-size: 44px !important;
+  }
+  .mobile-section-title {
+    font-size: 60px !important;
+  }
+  .mobile-section-subtitle {
+    font-size: 13px !important;
+  }
+  .mobile-timeline-time {
+    font-size: 24px !important;
+  }
+  .mobile-timeline-title {
+    font-size: 18px !important;
+  }
+  .mobile-timeline-subtitle {
+    font-size: 13px !important;
+  }
+  .mobile-venue-pre {
+    font-size: 15px !important;
+  }
+  .mobile-venue-title {
+    font-size: 28px !important;
+  }
+  .mobile-venue-address {
+    font-size: 15.5px !important;
+  }
+  .mobile-venue-btn {
+    font-size: 14.5px !important;
+  }
+  .mobile-intro-text {
+    font-size: 14.5px !important;
+    line-height: 1.65 !important;
+  }
+  .mobile-swatch-name {
+    font-size: 11.5px !important;
+  }
+  .mobile-swatch-hex {
+    font-size: 10px !important;
+  }
+  .mobile-guidance-title {
+    font-size: 17px !important;
+  }
+  .mobile-guidance-text {
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+  }
+  .mobile-timer-numeral {
+    font-size: 22px !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.01em !important;
+  }
+  .mobile-timer-label {
+    font-size: 8px !important;
+    letter-spacing: 0.12em !important;
+    margin-top: 4px !important;
+  }
+  .mobile-timer-hint {
+    font-size: 11.5px !important;
+  }
+  .mobile-save-date-btn {
+    font-size: 13px !important;
+  }
+  .mobile-monogram {
+    font-size: 76px !important;
+  }
+  .mobile-monogram-sub {
+    font-size: 13.5px !important;
+  }
+  .mobile-watermark {
+    font-size: 11.5px !important;
+  }
+}
+
+

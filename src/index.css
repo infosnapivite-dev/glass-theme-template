@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-sand: #FBF8F5;
+    --text-primary: #2C2724;
+    --text-secondary: #6E645F;
+    --accent-rose: #CFA4A4;
+    --accent-gold: #C5A880;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #0E0D0C;
+    color: #2C2724;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  /* Hardware Acceleration & Anti-Flickering Rules */
+  .gpu-accelerated {
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+    will-change: transform, opacity;
+  }
+
+  /* Hide scrollbars strictly while maintaining scroll functionality */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
+
+  /* Text selection styling */
+  ::selection {
+    background-color: #F4D8D8;
+    color: #2C2724;
+  }
+}
+
+/* ==========================================================================
+   AUTHENTIC APPLE VISIONOS / LIQUID GLASS DESIGN SYSTEM
+   ========================================================================== */
+
+/* 1. Vision Glass Card (Pristine Translucent Frosted Glass Slab) */
+.vision-glass-card {
+  background: linear-gradient(
+    140deg,
+    rgba(255, 255, 255, 0.52) 0%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0.38) 100%
+  );
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-top: 1px solid rgba(255, 255, 255, 0.85);
+  border-left: 1px solid rgba(255, 255, 255, 0.7);
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 16px 36px -10px rgba(180, 130, 130, 0.16),
+    0 4px 16px -2px rgba(0, 0, 0, 0.04),
+    inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* 2. Vision Glass Pill Button (Sculpted Liquid Acrylic Capsule) */
+.vision-glass-pill {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.65) 0%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border-top: 1px solid rgba(255, 255, 255, 0.9);
+  border-left: 1px solid rgba(255, 255, 255, 0.7);
+  border-right: 1px solid rgba(255, 255, 255, 0.45);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 6px 20px -4px rgba(0, 0, 0, 0.07),
+    inset 0 1.5px 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+/* 3. Vision Glass Pill Dark (High-Contrast Obsidian Glass) */
+.vision-glass-pill-dark {
+  background: linear-gradient(
+    180deg,
+    rgba(38, 34, 32, 0.88) 0%,
+    rgba(22, 19, 18, 0.94) 100%
+  );
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  border-left: 1px solid rgba(255, 255, 255, 0.22);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+  box-shadow:
+    0 10px 25px -4px rgba(0, 0, 0, 0.35),
+    inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1.5px 1px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* 4. Vision Glass Circle (Translucent Glass Disc) */
+.vision-glass-circle {
+  background: radial-gradient(
+    circle at 35% 30%,
+    rgba(255, 255, 255, 0.82) 0%,
+    rgba(255, 255, 255, 0.35) 100%
+  );
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow:
+    0 6px 18px -2px rgba(0, 0, 0, 0.06),
+    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* 5. Vision Glass Knob (The glowing optical button knob from Apple UI) */
+.vision-glass-knob {
+  background: radial-gradient(
+    circle at 35% 30%,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(255, 255, 255, 0.68) 100%
+  );
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 1.5px rgba(255, 255, 255, 1);
+}
+
+/* 6. Vision Glass Swatch Tile */
+.vision-glass-swatch {
+  border-top: 1px solid rgba(255, 255, 255, 0.9);
+  border-left: 1px solid rgba(255, 255, 255, 0.7);
+  border-right: 1px solid rgba(255, 255, 255, 0.35);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 8px 20px -4px rgba(0, 0, 0, 0.08),
+    inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+/* Typography styles */
+.font-cursive {
+  font-family: 'Great Vibes', 'Pinyon Script', cursive;
+}
+
+.font-pinyon {
+  font-family: 'Pinyon Script', cursive;
+}
+
+.font-alex {
+  font-family: 'Alex Brush', cursive;
+}
+
+.font-serif-luxury {
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+}
+
+/* Metallic gold text shimmer */
+.gold-shimmer {
+  background: linear-gradient(135deg, #B8976C 0%, #E6CA9E 50%, #9B7846 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
