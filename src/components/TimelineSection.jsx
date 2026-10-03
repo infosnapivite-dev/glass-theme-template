@@ -13,47 +13,47 @@ export default function TimelineSection() {
 
   const scheduleEvents = [
     {
-      time: '15:00',
-      title: 'Guest Assembly',
-      subtitle: 'Welcome champagne, live string acoustics & guest gathering',
-      location: 'Welcome Lounge & Courtyard',
+      time: '11:00 AM',
+      title: 'Haldi & Ganesh Pujan',
+      subtitle: 'Auspicious prayers, turmeric blessings & floral petals',
+      location: 'Haveli Courtyard & Poolside',
       description:
-        'Join us as we gather for welcome champagne, passed canapés, and acoustic string quartet melodies while greeting fellow friends and family.',
-      note: 'Please arrive by 15:15 to be comfortably seated.',
-      icon: GlassWater,
+        'Begin the festivities with auspicious Ganesh Vandana followed by a joyous Haldi ceremony with vibrant marigold splashes, live dhol rhythms, and traditional delicacies.',
+      note: 'Yellow & floral attire warmly recommended.',
+      icon: Sparkles,
       alignment: 'left',
     },
     {
-      time: '16:00',
-      title: 'Wedding Ceremony',
-      subtitle: 'Exchange of vows, rings, and heartfelt blessings',
-      location: 'Grand Marble Rotunda',
+      time: '04:00 PM',
+      title: 'Baraat & Milni',
+      subtitle: "Royal groom's procession & joyous family welcome",
+      location: 'Grand Palace Gates & Porch',
       description:
-        'The sacred union of Ivan & Anna. Exchange of personalized vows, wedding rings, heartfelt family blessings, and the celebratory petal toss.',
-      note: 'Photography is warmly welcomed after the processional.',
-      icon: HeartHandshake,
+        "Aarav's royal Baraat procession with traditional dhol players, brass band, and dancing, followed by the warm Milni ceremony uniting the two families.",
+      note: 'Royal Safas (turbans) will be provided at the main gate.',
+      icon: Moon,
       alignment: 'right',
     },
     {
-      time: '17:00',
-      title: 'Festive Banquet',
-      subtitle: 'Dinner, speeches, wedding dance & live celebrations',
-      location: 'Main Crystal Ballroom',
+      time: '05:30 PM',
+      title: 'Varmala & Sacred Pheras',
+      subtitle: 'Exchange of garlands & 7 sacred vows around the holy fire',
+      location: 'Lakeside Mandap Rotunda',
       description:
-        'A curated multi-course culinary dinner with sommelier wine pairings, champagne toasts, emotional speeches, first wedding dance, and live music.',
-      note: 'Special dietary preferences will be accommodated.',
-      icon: UtensilsCrossed,
+        'The sacred Vivah rituals of Aarav & Ananya. The exchange of fragrant floral Varmalas followed by Vedic mantras, Kanyadaan, and the 7 sacred Pheras around the holy Agni.',
+      note: 'Rose petals will be distributed for showering blessings.',
+      icon: HeartHandshake,
       alignment: 'left',
     },
     {
-      time: '23:00',
-      title: 'Evening Conclusion',
-      subtitle: 'Wedding cake ceremony, sparklers & farewell',
-      location: 'Garden Terrace & Grand Exit',
+      time: '08:00 PM',
+      title: 'Sangeet & Royal Banquet',
+      subtitle: 'Live music, performances, cocktails & grand dinner',
+      location: 'The Grand Crystal Ballroom',
       description:
-        'The ceremonial cutting of our artisan wedding cake, an illuminated sparkler farewell path, late-night dessert table, and bride & groom exit.',
-      note: 'Chauffeur and valet departures available at the main gate.',
-      icon: Moon,
+        'A celebratory evening of choreographed family dance performances, live musical band, curated multi-course royal banquet, cocktails, and dancing under the stars.',
+      note: 'Get ready to dance the night away with our DJ!',
+      icon: UtensilsCrossed,
       alignment: 'right',
     },
   ];
@@ -90,7 +90,7 @@ export default function TimelineSection() {
             }}
             className="mobile-section-subtitle text-[12px] uppercase tracking-[0.25em] text-[#9E8B7A] font-medium"
           >
-            Schedule &amp; Sequence
+            Ceremonies &amp; Itinerary
           </motion.p>
           <motion.p
             variants={{
@@ -99,7 +99,7 @@ export default function TimelineSection() {
             }}
             className="text-[11px] text-[#9E8B7A]/90 font-light mt-1.5"
           >
-            Tap any event to view schedule details ✨
+            Tap any ceremony to view ritual details ✨
           </motion.p>
         </motion.div>
       </div>

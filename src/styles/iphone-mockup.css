@@ -284,13 +284,17 @@
      MOBILE-ONLY TYPOGRAPHY SCALING (Applied ONLY on mobile screens <= 600px)
      -------------------------------------------------------------------------- */
   .mobile-tagline {
-    font-size: 14px !important;
+    font-size: 11.5px !important;
+    letter-spacing: 0.22em !important;
   }
   .mobile-names-serif {
-    font-size: 36px !important;
+    font-size: 23px !important;
+    letter-spacing: 0.14em !important;
+    color: #1A1614 !important;
   }
   .mobile-names-amp {
-    font-size: 48px !important;
+    font-size: 32px !important;
+    color: #A86F6F !important;
   }
   .mobile-header-script {
     font-size: 70px !important;

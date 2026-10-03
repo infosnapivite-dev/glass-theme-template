@@ -5,7 +5,7 @@ import confetti from 'canvas-confetti';
 import { downloadIcsFile, getGoogleCalendarUrl } from '../utils/calendar';
 
 export default function CountdownSection() {
-  const targetDate = new Date('2025-08-15T15:00:00');
+  const targetDate = new Date('2025-11-28T16:00:00');
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -99,7 +99,7 @@ export default function CountdownSection() {
             }}
             className="mobile-section-subtitle text-[12.5px] uppercase tracking-[0.25em] text-[#9E8B7A] font-medium"
           >
-            Counting Down Every Second
+            Counting Down to the Big Day
           </motion.p>
         </motion.div>
       </div>

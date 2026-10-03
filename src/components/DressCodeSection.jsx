@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 
 const outfits = [
-  { id: 1, src: '/assets/w1.png', alt: 'Sky Blue & Silver Attire', label: 'Look 01' },
-  { id: 2, src: '/assets/w2.png', alt: 'Royal Velvet & Gold Attire', label: 'Look 02' },
-  { id: 3, src: '/assets/w3.png', alt: 'Midnight Sapphire Attire', label: 'Look 03' },
-  { id: 4, src: '/assets/w4.png', alt: 'Regal Magenta & Royal Blue Attire', label: 'Look 04' },
+  { id: 1, src: '/assets/w1.png', alt: 'Sky Blue & Silver Attire', label: 'Look 01 • Pastel Serenity' },
+  { id: 2, src: '/assets/w2.png', alt: 'Royal Velvet & Gold Attire', label: 'Look 02 • Royal Heritage' },
+  { id: 3, src: '/assets/w3.png', alt: 'Midnight Sapphire Attire', label: 'Look 03 • Midnight Shimmer' },
+  { id: 4, src: '/assets/w4.png', alt: 'Regal Magenta & Royal Blue Attire', label: 'Look 04 • Regal Magenta' },
 ];
 
 const variants = {
@@ -100,7 +100,7 @@ export default function DressCodeSection() {
         className="max-w-[310px] mx-auto text-center mb-6"
       >
         <p className="mobile-intro-text text-[13px] leading-relaxed text-[#6B615A] font-light">
-          We have curated these attire inspirations to help you choose your look and celebrate with us in style.
+          We have curated these royal Indian attire inspirations (Pastels, Traditional Silks &amp; Indo-Western) to help you celebrate our wedding festivities in style.
         </p>
       </motion.div>
 

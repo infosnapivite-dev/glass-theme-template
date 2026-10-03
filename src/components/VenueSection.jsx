@@ -57,7 +57,7 @@ export default function VenueSection() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="mobile-venue-pre text-[14px] text-[#7A706A] font-light mb-1.5"
           >
-            We will be thrilled to see you at
+            We will be thrilled to welcome you to
           </motion.p>
 
           {/* Venue Name */}
@@ -68,7 +68,7 @@ export default function VenueSection() {
             transition={{ duration: 0.8, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
             className="mobile-venue-title font-serif text-[26px] font-semibold tracking-wide text-[#2C2724] mb-2 leading-tight"
           >
-            "All Seasons" Restaurant
+            The Oberoi Udaivilas
           </motion.h3>
 
           {/* Address Text */}
@@ -81,7 +81,7 @@ export default function VenueSection() {
           >
             <MapPin className="w-4 h-4 text-[#B88585] flex-shrink-0" />
             <p className="mobile-venue-address text-[14.5px] font-normal leading-relaxed">
-              34 Bolshaya Morskaya St., Saint Petersburg
+              Haridas Ji Ki Magri, Udaipur, Rajasthan 313001
             </p>
           </motion.div>
 
@@ -95,7 +95,7 @@ export default function VenueSection() {
           >
             <iframe
               title="Venue Location Map"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=30.3060%2C59.9300%2C30.3220%2C59.9360&layer=mapnik&marker=59.932998%2C30.314077"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=73.6600%2C24.5700%2C73.6900%2C24.5900&layer=mapnik&marker=24.5775%2C73.6738"
               className="w-full h-[calc(100%+48px)] -mb-[48px] border-0 filter saturate-[0.88] contrast-[1.05]"
               loading="lazy"
             />
@@ -104,7 +104,7 @@ export default function VenueSection() {
               <div className="px-2.5 py-1 rounded-full bg-white/85 backdrop-blur-md border border-white/70 shadow-sm flex items-center gap-1.5">
                 <div className="w-2 h-2 rounded-full bg-[#CFA4A4] animate-pulse" />
                 <span className="text-[11px] font-medium text-[#2C2724] tracking-wide">
-                  Venue Location
+                  Palace Location
                 </span>
               </div>
             </div>
@@ -118,7 +118,7 @@ export default function VenueSection() {
             transition={{ duration: 0.75, delay: 0.38 }}
           >
             <a
-              href="https://www.google.com/maps/dir/?api=1&destination=34+Bolshaya+Morskaya+St,+Saint+Petersburg"
+              href="https://www.google.com/maps/dir/?api=1&destination=The+Oberoi+Udaivilas,+Udaipur,+Rajasthan"
               target="_blank"
               rel="noopener noreferrer"
               className="vision-glass-pill-dark w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-5 rounded-full text-white text-[14.5px] font-medium tracking-wide transition-all active:scale-[0.98] hover:brightness-110 shadow-lg cursor-pointer"

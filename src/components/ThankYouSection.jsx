@@ -53,7 +53,7 @@ export default function ThankYouSection() {
             }}
             className="mobile-section-subtitle text-[11.5px] uppercase tracking-[0.25em] text-[#9E8B7A] font-medium"
           >
-            For Being Part of Our Story
+            For Being Part of Our Story &amp; Blessings
           </motion.p>
         </motion.div>
       </div>
@@ -67,7 +67,7 @@ export default function ThankYouSection() {
         className="relative z-10 max-w-[310px] sm:max-w-[330px] mx-auto mb-8"
       >
         <p className="mobile-body-p1 text-[14px] leading-relaxed text-[#5A514B] font-light">
-          We are deeply grateful for your love, warmth, and blessings as we embark on this beautiful new chapter. Having you celebrate alongside us means everything to our hearts.
+          We are deeply grateful for your love, presence, and heartfelt blessings as we step into this sacred new chapter. Having you celebrate our union means the world to our hearts.
         </p>
       </motion.div>
 
@@ -121,7 +121,7 @@ export default function ThankYouSection() {
           }}
           className="font-pinyon text-[26px] sm:text-[28px] text-[#A87B7B] leading-none mb-1"
         >
-          With all our love,
+          With all our love &amp; gratitude,
         </motion.p>
         <div className="flex items-center justify-center gap-2">
           <motion.span
@@ -131,7 +131,7 @@ export default function ThankYouSection() {
             }}
             className="font-serif text-[24px] sm:text-[26px] font-medium tracking-[0.15em] uppercase text-[#2C2724]"
           >
-            Ivan
+            Aarav
           </motion.span>
           <motion.span
             variants={{
@@ -149,7 +149,7 @@ export default function ThankYouSection() {
             }}
             className="font-serif text-[24px] sm:text-[26px] font-medium tracking-[0.15em] uppercase text-[#2C2724]"
           >
-            Anna
+            Ananya
           </motion.span>
         </div>
       </motion.div>
@@ -162,7 +162,7 @@ export default function ThankYouSection() {
         transition={{ duration: 0.9, delay: 0.45 }}
         className="relative z-10 text-center pt-2 text-[10.5px] text-[#A6998E] uppercase tracking-[0.22em] font-light"
       >
-        August 15, 2025 • Saint Petersburg
+        November 28, 2025 • Udaipur, Rajasthan
       </motion.div>
     </section>
   );

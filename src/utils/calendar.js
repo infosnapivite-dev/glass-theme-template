@@ -1,12 +1,12 @@
-// Calendar utility for Ivan & Anna's Wedding
+// Calendar utility for Aarav & Ananya's Wedding
 export const WEDDING_DETAILS = {
-  title: "Wedding of Ivan & Anna",
-  description: "We are thrilled to celebrate our wedding day with you! Venue: 'All Seasons' Restaurant, 34 Bolshaya Morskaya St.",
-  location: "'All Seasons' Restaurant, 34 Bolshaya Morskaya St.",
-  startDate: "20250815T150000",
-  endDate: "20250815T230000",
-  startISO: "2025-08-15T15:00:00",
-  endISO: "2025-08-15T23:00:00",
+  title: "Wedding of Aarav & Ananya",
+  description: "We are thrilled to celebrate our Shubh Vivah with you! Venue: The Oberoi Udaivilas, Udaipur, Rajasthan.",
+  location: "The Oberoi Udaivilas, Haridas Ji Ki Magri, Udaipur, Rajasthan 313001",
+  startDate: "20251128T160000",
+  endDate: "20251128T235900",
+  startISO: "2025-11-28T16:00:00",
+  endISO: "2025-11-28T23:59:00",
 };
 
 export const getGoogleCalendarUrl = () => {
@@ -24,7 +24,7 @@ export const downloadIcsFile = () => {
   const icsContent = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Ivan and Anna Wedding//EN",
+    "PRODID:-//Aarav and Ananya Wedding//EN",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     "BEGIN:VEVENT",
@@ -43,7 +43,7 @@ export const downloadIcsFile = () => {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.setAttribute("download", "Ivan_and_Anna_Wedding.ics");
+  link.setAttribute("download", "Aarav_and_Ananya_Wedding.ics");
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
