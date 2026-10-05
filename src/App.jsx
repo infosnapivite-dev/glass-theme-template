@@ -9,6 +9,7 @@ import GallerySection from './components/GallerySection';
 import VenueSection from './components/VenueSection';
 import DressCodeSection from './components/DressCodeSection';
 import CountdownSection from './components/CountdownSection';
+import RsvpSection from './components/RsvpSection';
 import ThankYouSection from './components/ThankYouSection';
 import PetalsOverlay from './components/PetalsOverlay';
 import MusicFloatingButton from './components/MusicFloatingButton';
@@ -99,7 +100,10 @@ export default function App() {
               {/* Section 6: Live Countdown & Save The Date */}
               <CountdownSection />
 
-              {/* Section 7: Thank You (Organic Non-Card Design) */}
+              {/* Section 7: RSVP Form Module */}
+              <RsvpSection />
+
+              {/* Section 8: Thank You (Organic Non-Card Design) */}
               <ThankYouSection />
             </div>
 
