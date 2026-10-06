@@ -535,7 +535,7 @@ export default function OpeningPage({ onOpen }) {
                 exit={{ opacity: 0, scale: 0.85, transition: { duration: 0.25 } }}
                 className="absolute inset-0 pointer-events-none z-30 flex items-center justify-center"
               >
-                <div className="relative flex flex-col items-center mt-12 animate-bounce">
+                <div className="anim-scratch-hand relative flex flex-col items-center mt-12">
                   {/* Glowing touch contact ripple */}
                   <div className="absolute -top-1 left-2.5 -translate-x-1/2 -translate-y-1/2">
                     <span className="absolute -inset-1.5 rounded-full bg-white/70 animate-ping" />

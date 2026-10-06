@@ -273,3 +273,26 @@ html.lenis, html.lenis body {
   animation: flowerFloat 6.5s ease-in-out infinite;
   will-change: transform;
 }
+
+@keyframes scratchHandSwipe {
+  0% {
+    transform: translate3d(-46px, -8px, 0) rotate(-12deg);
+  }
+  25% {
+    transform: translate3d(40px, 10px, 0) rotate(8deg);
+  }
+  50% {
+    transform: translate3d(-38px, 12px, 0) rotate(-8deg);
+  }
+  75% {
+    transform: translate3d(46px, -6px, 0) rotate(10deg);
+  }
+  100% {
+    transform: translate3d(-46px, -8px, 0) rotate(-12deg);
+  }
+}
+
+.anim-scratch-hand {
+  animation: scratchHandSwipe 2.4s ease-in-out infinite;
+  will-change: transform;
+}
