@@ -1,5 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 
+/**
+ * PetalsOverlay Component
+ * Renders floating romantic rose petals & delicate hearts without any vertical stretching.
+ * Uses ResizeObserver and Device Pixel Ratio scaling for crisp, un-distorted floating particles.
+ */
 export default function PetalsOverlay({ enabled = true }) {
   const canvasRef = useRef(null);
 
@@ -10,54 +15,78 @@ export default function PetalsOverlay({ enabled = true }) {
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
     let animationFrameId;
+    let width = 390;
+    let height = 800;
 
     const updateDimensions = () => {
-      canvas.width = canvas.parentElement ? canvas.parentElement.clientWidth : window.innerWidth;
-      canvas.height = canvas.parentElement ? canvas.parentElement.clientHeight : window.innerHeight;
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      width = rect.width || canvas.clientWidth || window.innerWidth;
+      height = rect.height || canvas.clientHeight || window.innerHeight;
+
+      // Match actual bitmap buffer pixels to CSS layout box
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+
+      ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform before scaling
+      ctx.scale(dpr, dpr);
     };
 
     updateDimensions();
+
+    const resizeObserver = new ResizeObserver(() => {
+      updateDimensions();
+    });
+
+    resizeObserver.observe(canvas);
+    if (canvas.parentElement) {
+      resizeObserver.observe(canvas.parentElement);
+    }
     window.addEventListener('resize', updateDimensions);
 
-    // Gently increased quantity to 34 for a richer, more noticeable heart shower
-    const itemsCount = 34;
+    // Rose petals and floating romantic hearts
+    const itemsCount = 26;
     const items = [];
 
     for (let i = 0; i < itemsCount; i++) {
       items.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: 7 + Math.random() * 9,
-        speedX: -0.4 + Math.random() * 0.8,
-        speedY: 0.45 + Math.random() * 0.85,
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: 7 + Math.random() * 8,
+        speedX: -0.35 + Math.random() * 0.7,
+        speedY: 0.45 + Math.random() * 0.65,
         rotation: Math.random() * 360,
         rotationSpeed: -1.0 + Math.random() * 2.0,
-        opacity: 0.32 + Math.random() * 0.48,
-        isHeart: Math.random() > 0.25, // 75% romantic hearts, 25% delicate rose petals
+        opacity: 0.35 + Math.random() * 0.45,
+        isHeart: Math.random() > 0.4,
         color:
-          Math.random() > 0.55
-            ? 'rgba(255, 175, 189, ' // Soft Rose Pink
-            : Math.random() > 0.25
-            ? 'rgba(244, 212, 212, ' // Warm Blush
-            : 'rgba(214, 160, 160, ', // Vintage Dusty Rose
+          Math.random() > 0.6
+            ? 'rgba(255, 180, 195, ' // Soft Rose Pink
+            : Math.random() > 0.3
+            ? 'rgba(244, 214, 214, ' // Blush Peach
+            : 'rgba(218, 168, 168, ', // Dusty Rose
       });
     }
 
     const render = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, width, height);
 
       items.forEach((p) => {
         p.x += p.speedX;
         p.y += p.speedY;
         p.rotation += p.rotationSpeed;
 
-        if (p.y > canvas.height + 25) {
+        if (p.y > height + 25) {
           p.y = -25;
-          p.x = Math.random() * canvas.width;
+          p.x = Math.random() * width;
         }
-        if (p.x > canvas.width + 25) p.x = -25;
-        if (p.x < -25) p.x = canvas.width + 25;
+        if (p.x > width + 25) p.x = -25;
+        if (p.x < -25) p.x = width + 25;
 
         ctx.save();
         ctx.translate(p.x, p.y);
@@ -65,7 +94,7 @@ export default function PetalsOverlay({ enabled = true }) {
         ctx.fillStyle = `${p.color}${p.opacity})`;
 
         if (p.isHeart) {
-          // Romantic Floating Heart Shape
+          // Un-distorted Floating Heart Shape
           const s = p.size * 0.75;
           ctx.beginPath();
           ctx.moveTo(0, -s * 0.3);
@@ -73,7 +102,7 @@ export default function PetalsOverlay({ enabled = true }) {
           ctx.bezierCurveTo(s * 1.1, -s * 0.2, s * 0.6, -s * 0.95, 0, -s * 0.3);
           ctx.fill();
         } else {
-          // Soft Curved Rose Petal Shape
+          // Un-distorted Curved Rose Petal Shape
           ctx.beginPath();
           ctx.moveTo(0, 0);
           ctx.bezierCurveTo(-p.size / 2, -p.size, -p.size, -p.size / 2, 0, p.size);
@@ -92,6 +121,7 @@ export default function PetalsOverlay({ enabled = true }) {
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', updateDimensions);
+      resizeObserver.disconnect();
     };
   }, [enabled]);
 
@@ -100,7 +130,7 @@ export default function PetalsOverlay({ enabled = true }) {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none absolute inset-0 z-20 h-full w-full opacity-80"
+      className="pointer-events-none fixed sm:absolute inset-0 z-20 w-full h-full max-w-[430px] mx-auto opacity-75"
       style={{ transform: 'translate3d(0,0,0)' }}
     />
   );

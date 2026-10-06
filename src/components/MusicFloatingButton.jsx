@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Volume2, VolumeX, Music } from 'lucide-react';
+import { Volume2, VolumeX } from 'lucide-react';
 import { ambientMusic } from '../utils/audio';
 
 export default function MusicFloatingButton() {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(() => ambientMusic.isPlaying);
+
+  useEffect(() => {
+    setIsPlaying(ambientMusic.isPlaying);
+  }, []);
 
   const toggleAudio = (e) => {
     e.stopPropagation();
@@ -14,49 +18,23 @@ export default function MusicFloatingButton() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8, y: 16 }}
+      initial={{ opacity: 0, scale: 0.8, y: -12 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed bottom-6 right-5 z-40"
+      transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed top-5 right-4 sm:top-6 sm:right-5 z-50"
     >
       <button
         onClick={toggleAudio}
-        className={`group flex items-center gap-2.5 pl-1.5 pr-4 py-1.5 rounded-full transition-all duration-300 active:scale-90 ${
-          isPlaying
-            ? 'vision-glass-pill-dark text-white ring-2 ring-[#FF9EAF]/40'
-            : 'vision-glass-pill text-[#2C2724] hover:brightness-105'
+        className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90 shadow-lg cursor-pointer backdrop-blur-xl border border-white/20 bg-black/80 hover:bg-black/90 text-white ${
+          isPlaying ? 'ring-2 ring-white/40 shadow-[0_0_15px_rgba(0,0,0,0.5)]' : 'opacity-85 hover:opacity-100'
         }`}
-        title={isPlaying ? 'Mute Background Music' : 'Play Romantic Music'}
+        title={isPlaying ? 'Mute Music' : 'Play Music'}
+        aria-label={isPlaying ? 'Mute Music' : 'Play Music'}
       >
-        {/* Apple-style circular glass icon knob */}
-        <div
-          className={`w-7 h-7 rounded-full flex items-center justify-center transition-transform ${
-            isPlaying ? 'bg-white/20' : 'vision-glass-knob'
-          }`}
-        >
-          {isPlaying ? (
-            <Volume2 className="w-3.5 h-3.5 text-[#FF9EAF] animate-pulse" />
-          ) : (
-            <Music className="w-3.5 h-3.5 text-[#A86F6F] group-hover:scale-110 transition-transform" />
-          )}
-        </div>
-
-        {/* Status Text / Waveform */}
         {isPlaying ? (
-          <div className="flex items-center gap-1.5">
-            <div className="flex items-center gap-0.5 h-3">
-              <span className="w-0.5 h-3 bg-[#FF9EAF] animate-bounce" style={{ animationDelay: '0ms' }} />
-              <span className="w-0.5 h-2 bg-[#FF9EAF] animate-bounce" style={{ animationDelay: '150ms' }} />
-              <span className="w-0.5 h-3.5 bg-[#FF9EAF] animate-bounce" style={{ animationDelay: '300ms' }} />
-            </div>
-            <span className="text-[10.5px] font-medium tracking-wider uppercase text-white/95">
-              Playing
-            </span>
-          </div>
+          <Volume2 className="w-4 h-4 text-white drop-shadow-[0_0_4px_rgba(255,255,255,0.7)] animate-pulse" />
         ) : (
-          <span className="text-[10.5px] font-medium tracking-wider uppercase text-[#423C38]">
-            Music
-          </span>
+          <VolumeX className="w-4 h-4 text-white/90" />
         )}
       </button>
     </motion.div>

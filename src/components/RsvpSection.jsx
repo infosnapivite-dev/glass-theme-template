@@ -25,7 +25,7 @@ export default function RsvpSection() {
       >
         {/* Section Header */}
         <div className="text-center mb-8 px-4">
-          <h2 className="mobile-section-title font-pinyon text-[54px] text-[#2C2724] leading-none mb-1.5">
+          <h2 className="mobile-section-title font-cormorant text-[42px] sm:text-[46px] font-medium tracking-[0.22em] uppercase text-[#2C2724] leading-none mb-2">
             RSVP
           </h2>
           <p className="mobile-section-subtitle text-[12px] uppercase tracking-[0.25em] text-[#9E8B7A] font-medium">

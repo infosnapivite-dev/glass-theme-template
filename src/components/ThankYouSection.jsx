@@ -38,7 +38,7 @@ export default function ThankYouSection() {
                 transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
               },
             }}
-            className="mobile-section-title font-pinyon text-[62px] sm:text-[68px] text-[#2C2724] leading-none mb-1.5 filter drop-shadow-sm"
+            className="mobile-section-title font-pinyon text-[48px] sm:text-[52px] text-[#2C2724] leading-tight mb-1.5 filter drop-shadow-sm whitespace-nowrap"
           >
             Thank You
           </motion.h2>

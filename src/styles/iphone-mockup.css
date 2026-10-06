@@ -140,7 +140,7 @@
   .iphone-device-frame {
     width: 100%;
     height: 100%;
-    background: #000;
+    background: #FAF8F5;
     border-radius: calc(12mm * var(--zoom, 1.22));
     position: relative;
     overflow: hidden;
@@ -209,7 +209,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: transparent;
+  background-color: #FAF8F5;
 }
 
 .inner-app-scroll {
@@ -278,6 +278,20 @@
     height: auto !important;
     max-width: 430px;
     margin: 0 auto;
+  }
+
+  /* When opening page is active on mobile, enforce strict non-scrollable full-height frame */
+  body.opening-active,
+  body.opening-active .desktop-viewport-container,
+  body.opening-active .iphone-wrapper,
+  body.opening-active .iphone-device-frame,
+  body.opening-active .inner-app-container {
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+    position: fixed !important;
+    inset: 0 !important;
   }
 
   /* --------------------------------------------------------------------------

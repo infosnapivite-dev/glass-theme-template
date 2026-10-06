@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Lenis from 'lenis';
+import { AnimatePresence, motion } from 'framer-motion';
 import IPhoneFrame from './components/IPhoneFrame';
 import './styles/iphone-mockup.css';
 import GlassBackground from './components/GlassBackground';
+import OpeningPage from './components/OpeningPage';
 import HeroSection from './components/HeroSection';
 import TimelineSection from './components/TimelineSection';
 import GallerySection from './components/GallerySection';
@@ -17,9 +19,12 @@ import MusicFloatingButton from './components/MusicFloatingButton';
 export default function App() {
   const scrollContainerRef = useRef(null);
   const [petalsEnabled] = useState(true);
+  const [isOpened, setIsOpened] = useState(false);
 
-  // Initialize Lenis Smooth Scroll
+  // Initialize Lenis Smooth Scroll only when Home Page is opened
   useEffect(() => {
+    if (!isOpened) return;
+
     let lenis;
     const isDesktop = window.innerWidth > 600;
 
@@ -49,7 +54,7 @@ export default function App() {
     }
 
     function raf(time) {
-      lenis.raf(time);
+      lenis?.raf(time);
       requestAnimationFrame(raf);
     }
 
@@ -57,12 +62,28 @@ export default function App() {
 
     return () => {
       cancelAnimationFrame(animId);
-      lenis.destroy();
+      if (lenis) lenis.destroy();
     };
-  }, []);
+  }, [isOpened]);
+
+  // Keep body overflow locked on mobile when opening screen is active
+  useEffect(() => {
+    if (!isOpened) {
+      document.body.classList.add('opening-active');
+    } else {
+      // Delay unlocking body scroll slightly so the crossfade dissolve finishes seamlessly
+      const timer = setTimeout(() => {
+        document.body.classList.remove('opening-active');
+      }, 700);
+      return () => clearTimeout(timer);
+    }
+    return () => {
+      document.body.classList.remove('opening-active');
+    };
+  }, [isOpened]);
 
   return (
-    <div className="desktop-viewport-container">
+    <div className={`desktop-viewport-container ${!isOpened ? 'opening-active' : ''}`}>
       {/* Preserved Luxury Desktop Ambient Background */}
       <div
         className="fixed inset-0 bg-cover bg-center filter blur-xl scale-105 opacity-35 pointer-events-none transition-opacity duration-1000 z-0"
@@ -72,14 +93,20 @@ export default function App() {
 
       {/* iPhone 15 Pro / 16 Pro 3D Parallax Chassis */}
       <IPhoneFrame>
-        <main ref={scrollContainerRef} className="inner-app-scroll">
-          <div className="relative w-full min-h-full font-sans antialiased text-[#2C2724] select-none bg-transparent">
-            {/* Animated Blurred Glass Pink Glow Background */}
-            <GlassBackground />
+        <div className="relative w-full h-full font-sans antialiased text-[#2C2724] select-none bg-[#FAF8F5] overflow-hidden">
+          {/* Animated Blurred Glass Pink Glow Background */}
+          <GlassBackground />
 
-            {/* Floating Rose Petals Animation */}
-            <PetalsOverlay enabled={petalsEnabled} />
+          {/* Floating Rose Petals Animation */}
+          <PetalsOverlay enabled={petalsEnabled} />
 
+          {/* Main Home Page Scroll View (Persistently present underneath for seamless cross-blend) */}
+          <main
+            ref={scrollContainerRef}
+            className={`inner-app-scroll relative z-10 w-full h-full transition-opacity duration-700 ease-out ${
+              isOpened ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+            }`}
+          >
             {/* Invitation Content Sections */}
             <div className="relative z-10">
               {/* Section 1: Hero & Welcome */}
@@ -109,8 +136,27 @@ export default function App() {
 
             {/* In-app Audio Trigger */}
             <MusicFloatingButton />
-          </div>
-        </main>
+          </main>
+
+          {/* Opening Page Scratch Overlay (Cross-blend dissolves smoothly into Home Page) */}
+          <AnimatePresence>
+            {!isOpened && (
+              <motion.div
+                key="opening-overlay"
+                initial={{ opacity: 1 }}
+                exit={{
+                  opacity: 0,
+                  filter: 'blur(10px)',
+                  scale: 1.04,
+                  transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
+                }}
+                className="absolute inset-0 z-30 w-full h-full bg-[#FAF8F5]/80 backdrop-blur-md overflow-hidden"
+              >
+                <OpeningPage onOpen={() => setIsOpened(true)} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </IPhoneFrame>
     </div>
   );
