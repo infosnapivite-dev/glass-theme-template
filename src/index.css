@@ -12,9 +12,11 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    /* CRITICAL FOR LENIS: Do NOT set scroll-behavior: smooth */
+    scroll-behavior: auto !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
@@ -24,6 +26,7 @@
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* Hardware Acceleration & Anti-Flickering Rules */
@@ -32,9 +35,7 @@
     -webkit-transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    perspective: 1000px;
-    -webkit-perspective: 1000px;
-    will-change: transform, opacity;
+    will-change: transform;
   }
 
   /* Hide scrollbars strictly while maintaining scroll functionality */
@@ -56,90 +57,123 @@
 }
 
 /* ==========================================================================
-   AUTHENTIC APPLE VISIONOS / LIQUID GLASS DESIGN SYSTEM
+   LENIS SMOOTH SCROLL INTEGRATION RULES
+   ========================================================================== */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   AUTHENTIC APPLE VISIONOS / LIQUID GLASS DESIGN SYSTEM (HIGH FPS OPTIMIZED)
    ========================================================================== */
 
 /* 1. Vision Glass Card (Pristine Translucent Frosted Glass Slab) */
 .vision-glass-card {
   background: linear-gradient(
     140deg,
-    rgba(255, 255, 255, 0.52) 0%,
-    rgba(255, 255, 255, 0.22) 50%,
-    rgba(255, 255, 255, 0.38) 100%
+    rgba(255, 255, 255, 0.72) 0%,
+    rgba(255, 255, 255, 0.42) 50%,
+    rgba(255, 255, 255, 0.60) 100%
   );
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border-top: 1px solid rgba(255, 255, 255, 0.85);
-  border-left: 1px solid rgba(255, 255, 255, 0.7);
-  border-right: 1px solid rgba(255, 255, 255, 0.4);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border-top: 1px solid rgba(255, 255, 255, 0.95);
+  border-left: 1px solid rgba(255, 255, 255, 0.8);
+  border-right: 1px solid rgba(255, 255, 255, 0.45);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
   box-shadow:
-    0 16px 36px -10px rgba(180, 130, 130, 0.16),
-    0 4px 16px -2px rgba(0, 0, 0, 0.04),
+    0 14px 34px -8px rgba(180, 130, 130, 0.15),
+    0 4px 14px -2px rgba(0, 0, 0, 0.03),
     inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.95),
-    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.03);
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.02);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* 2. Vision Glass Pill Button (Sculpted Liquid Acrylic Capsule) */
 .vision-glass-pill {
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.65) 0%,
-    rgba(255, 255, 255, 0.3) 100%
+    rgba(255, 255, 255, 0.78) 0%,
+    rgba(255, 255, 255, 0.45) 100%
   );
-  backdrop-filter: blur(20px) saturate(190%);
-  -webkit-backdrop-filter: blur(20px) saturate(190%);
-  border-top: 1px solid rgba(255, 255, 255, 0.9);
-  border-left: 1px solid rgba(255, 255, 255, 0.7);
-  border-right: 1px solid rgba(255, 255, 255, 0.45);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border-top: 1px solid rgba(255, 255, 255, 0.95);
+  border-left: 1px solid rgba(255, 255, 255, 0.75);
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
   box-shadow:
-    0 6px 20px -4px rgba(0, 0, 0, 0.07),
+    0 6px 18px -4px rgba(0, 0, 0, 0.06),
     inset 0 1.5px 1px 0 rgba(255, 255, 255, 1),
-    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04);
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.03);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 /* 3. Vision Glass Pill Dark (High-Contrast Obsidian Glass) */
 .vision-glass-pill-dark {
   background: linear-gradient(
     180deg,
-    rgba(38, 34, 32, 0.88) 0%,
-    rgba(22, 19, 18, 0.94) 100%
+    rgba(38, 34, 32, 0.92) 0%,
+    rgba(22, 19, 18, 0.96) 100%
   );
-  backdrop-filter: blur(24px) saturate(190%);
-  -webkit-backdrop-filter: blur(24px) saturate(190%);
-  border-top: 1px solid rgba(255, 255, 255, 0.35);
-  border-left: 1px solid rgba(255, 255, 255, 0.22);
-  border-right: 1px solid rgba(255, 255, 255, 0.15);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-top: 1px solid rgba(255, 255, 255, 0.38);
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  border-right: 1px solid rgba(255, 255, 255, 0.16);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.65);
   box-shadow:
     0 10px 25px -4px rgba(0, 0, 0, 0.35),
     inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.45),
     inset 0 -1.5px 1px 0 rgba(0, 0, 0, 0.8);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 /* 4. Vision Glass Circle (Translucent Glass Disc) */
 .vision-glass-circle {
   background: radial-gradient(
     circle at 35% 30%,
-    rgba(255, 255, 255, 0.82) 0%,
-    rgba(255, 255, 255, 0.35) 100%
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(255, 255, 255, 0.45) 100%
   );
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow:
-    0 6px 18px -2px rgba(0, 0, 0, 0.06),
+    0 6px 16px -2px rgba(0, 0, 0, 0.05),
     inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 1),
-    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.05);
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
-/* 5. Vision Glass Knob (The glowing optical button knob from Apple UI) */
+/* 5. Vision Glass Knob */
 .vision-glass-knob {
   background: radial-gradient(
     circle at 35% 30%,
     rgba(255, 255, 255, 0.98) 0%,
-    rgba(255, 255, 255, 0.68) 100%
+    rgba(255, 255, 255, 0.72) 100%
   );
   box-shadow:
     0 2px 8px rgba(0, 0, 0, 0.1),
@@ -179,4 +213,63 @@
   background: linear-gradient(135deg, #B8976C 0%, #E6CA9E 50%, #9B7846 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* ==========================================================================
+   GPU-COMPOSITED CSS KEYFRAMES (0% JS OVERHEAD FOR 90+ FPS SCROLL)
+   ========================================================================== */
+@keyframes orbFloat1 {
+  0% { transform: translate3d(-20px, -20px, 0) scale(1); opacity: 0.75; }
+  50% { transform: translate3d(45px, 35px, 0) scale(1.22); opacity: 0.95; }
+  100% { transform: translate3d(-10px, 10px, 0) scale(0.95); opacity: 0.75; }
+}
+
+@keyframes orbFloat2 {
+  0% { transform: translate3d(20px, 25px, 0) scale(0.94); opacity: 0.7; }
+  50% { transform: translate3d(-50px, -40px, 0) scale(1.2); opacity: 0.92; }
+  100% { transform: translate3d(15px, 20px, 0) scale(0.9); opacity: 0.7; }
+}
+
+@keyframes orbFloat3 {
+  0% { transform: translate3d(-20px, -15px, 0) scale(1); opacity: 0.72; }
+  50% { transform: translate3d(40px, 30px, 0) scale(1.18); opacity: 0.95; }
+  100% { transform: translate3d(-15px, 15px, 0) scale(0.95); opacity: 0.72; }
+}
+
+@keyframes orbFloat4 {
+  0% { transform: translate3d(25px, 25px, 0) scale(0.95); opacity: 0.78; }
+  50% { transform: translate3d(-45px, -35px, 0) scale(1.22); opacity: 0.98; }
+  100% { transform: translate3d(15px, 15px, 0) scale(0.92); opacity: 0.78; }
+}
+
+@keyframes flowerFloat {
+  0% { transform: translate3d(0, 0, 0) rotate(-3deg) scale(1); }
+  33% { transform: translate3d(4px, -10px, 0) rotate(1.5deg) scale(1.025); }
+  66% { transform: translate3d(-3px, 4px, 0) rotate(-5deg) scale(0.99); }
+  100% { transform: translate3d(0, 0, 0) rotate(-3deg) scale(1); }
+}
+
+.anim-orb-1 {
+  animation: orbFloat1 10s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.anim-orb-2 {
+  animation: orbFloat2 12s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.anim-orb-3 {
+  animation: orbFloat3 11s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.anim-orb-4 {
+  animation: orbFloat4 13s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.anim-flower-sway {
+  animation: flowerFloat 6.5s ease-in-out infinite;
+  will-change: transform;
 }

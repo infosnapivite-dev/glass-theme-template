@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 export default function RsvpSection() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-30px' }}
-      transition={{ duration: 0.85, ease: 'easeOut' }}
+      transition={{ duration: 0.75, ease: 'easeOut' }}
       style={{
         transform: 'translate3d(0, 0, 0)',
         backfaceVisibility: 'hidden',
@@ -17,11 +17,6 @@ export default function RsvpSection() {
       <section
         id="rsvp"
         className="relative w-full bg-transparent px-4 py-12 border-t border-[#EAE2D8]/40 overflow-hidden"
-        style={{
-          transform: 'translate3d(0, 0, 0)',
-          backfaceVisibility: 'hidden',
-          willChange: 'transform, opacity',
-        }}
       >
         {/* Section Header */}
         <div className="text-center mb-8 px-4">
@@ -35,11 +30,10 @@ export default function RsvpSection() {
 
         {/* Glassmorphism Container with full height for all form pages */}
         <div
-          className="relative w-full max-w-[393px] mx-auto rounded-3xl backdrop-blur-xl bg-white/40 border border-white/20 shadow-lg overflow-hidden p-2 min-h-[880px]"
+          className="relative w-full max-w-[393px] mx-auto rounded-3xl backdrop-blur-xl bg-white/50 border border-white/40 shadow-lg overflow-hidden p-2 min-h-[880px]"
           style={{
             transform: 'translate3d(0, 0, 0)',
             backfaceVisibility: 'hidden',
-            willChange: 'transform, opacity',
           }}
         >
           <iframe
@@ -52,6 +46,7 @@ export default function RsvpSection() {
             scrolling="no"
             title="RSVP Form"
             className="w-full h-[880px] rounded-2xl border-0 block"
+            loading="lazy"
           />
         </div>
       </section>

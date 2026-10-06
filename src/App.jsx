@@ -18,6 +18,7 @@ import MusicFloatingButton from './components/MusicFloatingButton';
 
 export default function App() {
   const scrollContainerRef = useRef(null);
+  const lenisRef = useRef(null);
   const [petalsEnabled] = useState(true);
   const [isOpened, setIsOpened] = useState(false);
 
@@ -26,6 +27,7 @@ export default function App() {
     if (!isOpened) return;
 
     let lenis;
+    let animId;
     const isDesktop = window.innerWidth > 600;
 
     if (isDesktop && scrollContainerRef.current) {
@@ -33,36 +35,57 @@ export default function App() {
       lenis = new Lenis({
         wrapper: scrollContainerRef.current,
         content: scrollContainerRef.current.firstElementChild || scrollContainerRef.current,
-        duration: 1.2,
+        duration: 1.1,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         orientation: 'vertical',
         gestureOrientation: 'vertical',
         smoothWheel: true,
-        wheelMultiplier: 1.1,
+        wheelMultiplier: 1.0,
         touchMultiplier: 1.5,
+        infinite: false,
       });
     } else {
-      // Smooth scroll on mobile window
+      // Smooth scroll on mobile window (90+ / 120 FPS high-refresh rate optimized)
       lenis = new Lenis({
-        duration: 1.2,
+        duration: 1.0,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         orientation: 'vertical',
+        gestureOrientation: 'vertical',
         smoothWheel: true,
-        wheelMultiplier: 1.1,
-        touchMultiplier: 1.5,
+        wheelMultiplier: 1.0,
+        touchMultiplier: 1.6,
+        infinite: false,
       });
     }
 
+    lenisRef.current = lenis;
+
     function raf(time) {
-      lenis?.raf(time);
-      requestAnimationFrame(raf);
+      lenis.raf(time);
+      animId = requestAnimationFrame(raf);
     }
 
-    const animId = requestAnimationFrame(raf);
+    animId = requestAnimationFrame(raf);
+
+    // Trigger immediate resize recalculation after render
+    const resizeTimer = setTimeout(() => {
+      lenis.resize();
+    }, 150);
+
+    const handleResize = () => {
+      lenis.resize();
+    };
+
+    window.addEventListener('resize', handleResize, { passive: true });
 
     return () => {
+      clearTimeout(resizeTimer);
       cancelAnimationFrame(animId);
-      if (lenis) lenis.destroy();
+      window.removeEventListener('resize', handleResize);
+      if (lenis) {
+        lenis.destroy();
+        lenisRef.current = null;
+      }
     };
   }, [isOpened]);
 
@@ -74,6 +97,9 @@ export default function App() {
       // Delay unlocking body scroll slightly so the crossfade dissolve finishes seamlessly
       const timer = setTimeout(() => {
         document.body.classList.remove('opening-active');
+        if (lenisRef.current) {
+          lenisRef.current.resize();
+        }
       }, 700);
       return () => clearTimeout(timer);
     }
@@ -94,13 +120,13 @@ export default function App() {
       {/* iPhone 15 Pro / 16 Pro 3D Parallax Chassis */}
       <IPhoneFrame>
         <div className="relative w-full h-full font-sans antialiased text-[#2C2724] select-none bg-[#FAF8F5] overflow-hidden">
-          {/* Animated Blurred Glass Pink Glow Background */}
+          {/* Animated Blurred Glass Pink Glow Background (GPU Accelerated) */}
           <GlassBackground />
 
           {/* Floating Rose Petals Animation */}
           <PetalsOverlay enabled={petalsEnabled} />
 
-          {/* Main Home Page Scroll View (Persistently present underneath for seamless cross-blend) */}
+          {/* Main Home Page Scroll View */}
           <main
             ref={scrollContainerRef}
             className={`inner-app-scroll relative z-10 w-full h-full transition-opacity duration-700 ease-out ${
@@ -146,11 +172,11 @@ export default function App() {
                 initial={{ opacity: 1 }}
                 exit={{
                   opacity: 0,
-                  filter: 'blur(10px)',
-                  scale: 1.04,
-                  transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
+                  filter: 'blur(8px)',
+                  scale: 1.03,
+                  transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
                 }}
-                className="absolute inset-0 z-30 w-full h-full bg-[#FAF8F5]/80 backdrop-blur-md overflow-hidden"
+                className="absolute inset-0 z-30 w-full h-full overflow-hidden"
               >
                 <OpeningPage onOpen={() => setIsOpened(true)} />
               </motion.div>
@@ -161,4 +187,3 @@ export default function App() {
     </div>
   );
 }
-

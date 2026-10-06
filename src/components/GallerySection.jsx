@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, ChevronLeft, ChevronRight, Camera } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const galleryItems = [
   {
@@ -51,7 +51,6 @@ export default function GallerySection() {
     setActiveIndex((prev) => (prev + 1) % galleryItems.length);
   };
 
-  // Helper to calculate circular distance
   const getCardTransform = (index) => {
     const total = galleryItems.length;
     let diff = (index - activeIndex) % total;
@@ -76,7 +75,7 @@ export default function GallerySection() {
           rotateY: 26,
           zIndex: 20,
           opacity: 0.72,
-          brightness: 0.8,
+          brightness: 0.82,
           display: 'block',
         };
       case 1:
@@ -86,7 +85,7 @@ export default function GallerySection() {
           rotateY: -26,
           zIndex: 20,
           opacity: 0.72,
-          brightness: 0.8,
+          brightness: 0.82,
           display: 'block',
         };
       case -2:
@@ -96,7 +95,7 @@ export default function GallerySection() {
           rotateY: 38,
           zIndex: 10,
           opacity: 0.4,
-          brightness: 0.6,
+          brightness: 0.65,
           display: 'block',
         };
       case 2:
@@ -106,7 +105,7 @@ export default function GallerySection() {
           rotateY: -38,
           zIndex: 10,
           opacity: 0.4,
-          brightness: 0.6,
+          brightness: 0.65,
           display: 'block',
         };
       default:
@@ -134,14 +133,14 @@ export default function GallerySection() {
             hidden: { opacity: 0 },
             visible: {
               opacity: 1,
-              transition: { staggerChildren: 0.12 },
+              transition: { staggerChildren: 0.1 },
             },
           }}
         >
           <motion.h2
             variants={{
-              hidden: { opacity: 0, y: 16, filter: 'blur(4px)' },
-              visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] } },
+              hidden: { opacity: 0, y: 14 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
             }}
             className="mobile-section-title font-pinyon text-[54px] text-[#2C2724] leading-none mb-1.5"
           >
@@ -149,8 +148,8 @@ export default function GallerySection() {
           </motion.h2>
           <motion.p
             variants={{
-              hidden: { opacity: 0, y: 10 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
+              hidden: { opacity: 0, y: 8 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
             }}
             className="mobile-section-subtitle text-[12px] uppercase tracking-[0.25em] text-[#9E8B7A] font-medium"
           >
@@ -161,10 +160,10 @@ export default function GallerySection() {
 
       {/* 3D Perspective Curved Coverflow Carousel */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.93, y: 20 }}
+        initial={{ opacity: 0, scale: 0.95, y: 16 }}
         whileInView={{ opacity: 1, scale: 1, y: 0 }}
         viewport={{ once: true, margin: '-20px' }}
-        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className="relative w-full max-w-[360px] mx-auto min-h-[340px] flex items-center justify-center select-none"
       >
         <div
@@ -187,7 +186,7 @@ export default function GallerySection() {
                   filter: `brightness(${transform.brightness})`,
                 }}
                 transition={{
-                  duration: 0.55,
+                  duration: 0.45,
                   ease: [0.25, 1, 0.5, 1],
                 }}
                 onClick={() => setActiveIndex(index)}
@@ -197,6 +196,7 @@ export default function GallerySection() {
                 style={{
                   transformOrigin: 'center center',
                   transformStyle: 'preserve-3d',
+                  willChange: 'transform, opacity',
                 }}
               >
                 {/* Image Background */}
@@ -205,9 +205,10 @@ export default function GallerySection() {
                   alt={item.title}
                   className="w-full h-full object-cover pointer-events-none"
                   draggable={false}
+                  loading="lazy"
                 />
 
-                {/* Top Category Tag Pill (Matching Reference Design) */}
+                {/* Top Category Tag Pill */}
                 <div className="absolute top-3 left-3 pointer-events-none z-10">
                   <span className="inline-block px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-md text-[10px] font-medium text-white tracking-wide border border-white/20">
                     {item.tag}
@@ -252,10 +253,10 @@ export default function GallerySection() {
 
       {/* Pagination Dots */}
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
+        initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.7, delay: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.25 }}
         className="flex items-center justify-center gap-2 pt-3 pb-2"
       >
         {galleryItems.map((_, idx) => {

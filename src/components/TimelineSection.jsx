@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GlassWater, HeartHandshake, UtensilsCrossed, Moon, X, Clock, MapPin, Sparkles, Check } from 'lucide-react';
+import { HeartHandshake, UtensilsCrossed, Moon, X, Clock, MapPin, Sparkles, Check } from 'lucide-react';
 
 export default function TimelineSection() {
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -70,14 +70,14 @@ export default function TimelineSection() {
             hidden: { opacity: 0 },
             visible: {
               opacity: 1,
-              transition: { staggerChildren: 0.12 },
+              transition: { staggerChildren: 0.1 },
             },
           }}
         >
           <motion.h2
             variants={{
-              hidden: { opacity: 0, y: 16, filter: 'blur(4px)' },
-              visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] } },
+              hidden: { opacity: 0, y: 14 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
             }}
             className="mobile-section-title font-pinyon text-[54px] text-[#2C2724] leading-none mb-1.5"
           >
@@ -85,8 +85,8 @@ export default function TimelineSection() {
           </motion.h2>
           <motion.p
             variants={{
-              hidden: { opacity: 0, y: 10 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
+              hidden: { opacity: 0, y: 8 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
             }}
             className="mobile-section-subtitle text-[12px] uppercase tracking-[0.25em] text-[#9E8B7A] font-medium"
           >
@@ -95,7 +95,7 @@ export default function TimelineSection() {
           <motion.p
             variants={{
               hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { duration: 0.8, delay: 0.2 } },
+              visible: { opacity: 1, transition: { duration: 0.7, delay: 0.15 } },
             }}
             className="text-[11px] text-[#9E8B7A]/90 font-light mt-1.5"
           >
@@ -111,7 +111,7 @@ export default function TimelineSection() {
           initial={{ scaleY: 0, opacity: 0 }}
           whileInView={{ scaleY: 1, opacity: 1 }}
           viewport={{ once: true, margin: '-20px' }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
           style={{ originY: 0 }}
           className="absolute left-[50%] top-2 bottom-4 w-[1px] -translate-x-1/2 bg-gradient-to-b from-[#D8C7B5]/80 via-[#CFA4A4]/50 to-[#D8C7B5]/10"
         />
@@ -123,12 +123,12 @@ export default function TimelineSection() {
             return (
               <motion.div
                 key={item.time}
-                initial={{ opacity: 0, y: 22 }}
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-20px' }}
                 transition={{
-                  duration: 0.8,
-                  delay: index * 0.14,
+                  duration: 0.75,
+                  delay: index * 0.1,
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 className={`relative flex items-center ${
@@ -147,11 +147,11 @@ export default function TimelineSection() {
                     whileInView={{ scale: 1, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{
-                      duration: 0.6,
-                      delay: 0.15 + index * 0.12,
+                      duration: 0.55,
+                      delay: 0.1 + index * 0.1,
                       type: 'spring',
-                      stiffness: 300,
-                      damping: 20,
+                      stiffness: 320,
+                      damping: 22,
                     }}
                     className="w-7 h-7 rounded-full vision-glass-circle flex items-center justify-center transition-transform group-hover:scale-110 group-active:scale-95 shadow-md"
                   >
@@ -168,35 +168,17 @@ export default function TimelineSection() {
                     style={{ textAlign: isLeft ? 'right' : 'left' }}
                   >
                     {/* Timestamp */}
-                    <motion.span
-                      initial={{ opacity: 0, x: isLeft ? -10 : 10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.7, delay: 0.1 + index * 0.12 }}
-                      className="mobile-timeline-time font-serif text-[22px] font-semibold tracking-wider text-[#2C2724] group-hover:text-[#8C5E5E] transition-colors block"
-                    >
+                    <span className="mobile-timeline-time font-serif text-[22px] font-semibold tracking-wider text-[#2C2724] group-hover:text-[#8C5E5E] transition-colors block">
                       {item.time}
-                    </motion.span>
+                    </span>
                     {/* Event Title */}
-                    <motion.h3
-                      initial={{ opacity: 0, y: 6 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.75, delay: 0.18 + index * 0.12 }}
-                      className="mobile-timeline-title font-serif text-[17px] font-medium text-[#423C38] leading-tight mt-0.5 group-hover:text-[#2C2724] underline-offset-4 group-hover:underline"
-                    >
+                    <h3 className="mobile-timeline-title font-serif text-[17px] font-medium text-[#423C38] leading-tight mt-0.5 group-hover:text-[#2C2724] underline-offset-4 group-hover:underline">
                       {item.title}
-                    </motion.h3>
+                    </h3>
                     {/* Subtitle */}
-                    <motion.p
-                      initial={{ opacity: 0, y: 6 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.75, delay: 0.24 + index * 0.12 }}
-                      className="mobile-timeline-subtitle text-[12.5px] text-[#786E68] font-light leading-snug mt-1"
-                    >
+                    <p className="mobile-timeline-subtitle text-[12.5px] text-[#786E68] font-light leading-snug mt-1">
                       {item.subtitle}
-                    </motion.p>
+                    </p>
                   </button>
                 </div>
               </motion.div>
@@ -216,23 +198,23 @@ export default function TimelineSection() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25 }}
+                  transition={{ duration: 0.22 }}
                   onClick={() => setSelectedEvent(null)}
                   className="fixed inset-0 bg-black/60 backdrop-blur-[12px]"
                 />
 
                 {/* Glass Modal Card */}
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.88, y: 16 }}
+                  initial={{ opacity: 0, scale: 0.92, y: 14 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9, y: 12 }}
-                  transition={{ type: 'spring', damping: 26, stiffness: 320 }}
+                  exit={{ opacity: 0, scale: 0.92, y: 10 }}
+                  transition={{ type: 'spring', damping: 28, stiffness: 340 }}
                   className="relative z-10 w-full max-w-[330px] rounded-[30px] p-6 shadow-[0_24px_60px_rgba(0,0,0,0.5)] border border-white/85 overflow-hidden text-center"
                   style={{
                     background:
-                      'linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(250, 245, 240, 0.82) 50%, rgba(255, 255, 255, 0.88) 100%)',
-                    backdropFilter: 'blur(36px) saturate(200%)',
-                    WebkitBackdropFilter: 'blur(36px) saturate(200%)',
+                      'linear-gradient(145deg, rgba(255, 255, 255, 0.94) 0%, rgba(250, 245, 240, 0.88) 50%, rgba(255, 255, 255, 0.92) 100%)',
+                    backdropFilter: 'blur(24px) saturate(180%)',
+                    WebkitBackdropFilter: 'blur(24px) saturate(180%)',
                   }}
                 >
                   {/* Top Close Icon Button */}
@@ -290,5 +272,3 @@ export default function TimelineSection() {
     </section>
   );
 }
-
-

@@ -11,9 +11,9 @@ const outfits = [
 
 const variants = {
   enter: (direction) => ({
-    x: direction > 0 ? 180 : -180,
+    x: direction > 0 ? 150 : -150,
     opacity: 0,
-    scale: 0.94,
+    scale: 0.95,
   }),
   center: {
     zIndex: 1,
@@ -21,19 +21,19 @@ const variants = {
     opacity: 1,
     scale: 1,
     transition: {
-      x: { type: 'spring', stiffness: 320, damping: 32 },
-      opacity: { duration: 0.3 },
-      scale: { duration: 0.3 },
+      x: { type: 'spring', stiffness: 340, damping: 30 },
+      opacity: { duration: 0.25 },
+      scale: { duration: 0.25 },
     },
   },
   exit: (direction) => ({
     zIndex: 0,
-    x: direction < 0 ? 180 : -180,
+    x: direction < 0 ? 150 : -150,
     opacity: 0,
-    scale: 0.94,
+    scale: 0.95,
     transition: {
-      x: { type: 'spring', stiffness: 320, damping: 32 },
-      opacity: { duration: 0.25 },
+      x: { type: 'spring', stiffness: 340, damping: 30 },
+      opacity: { duration: 0.2 },
     },
   }),
 };
@@ -66,14 +66,14 @@ export default function DressCodeSection() {
             hidden: { opacity: 0 },
             visible: {
               opacity: 1,
-              transition: { staggerChildren: 0.12 },
+              transition: { staggerChildren: 0.1 },
             },
           }}
         >
           <motion.h2
             variants={{
-              hidden: { opacity: 0, y: 16, filter: 'blur(4px)' },
-              visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] } },
+              hidden: { opacity: 0, y: 14 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
             }}
             className="mobile-section-title font-pinyon text-[52px] text-[#2C2724] leading-none mb-1"
           >
@@ -81,8 +81,8 @@ export default function DressCodeSection() {
           </motion.h2>
           <motion.p
             variants={{
-              hidden: { opacity: 0, y: 10 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
+              hidden: { opacity: 0, y: 8 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
             }}
             className="mobile-section-subtitle text-[11px] uppercase tracking-[0.25em] text-[#9E8B7A] font-medium"
           >
@@ -93,10 +93,10 @@ export default function DressCodeSection() {
 
       {/* Intro Subtext */}
       <motion.div
-        initial={{ opacity: 0, y: 14 }}
+        initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-20px' }}
-        transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         className="max-w-[310px] mx-auto text-center mb-6"
       >
         <p className="mobile-intro-text text-[13px] leading-relaxed text-[#6B615A] font-light">
@@ -106,20 +106,14 @@ export default function DressCodeSection() {
 
       {/* VisionOS Glass Carousel Container */}
       <motion.div
-        initial={{ opacity: 0, y: 22, scale: 0.95 }}
+        initial={{ opacity: 0, y: 18, scale: 0.96 }}
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true, margin: '-30px' }}
-        transition={{ duration: 0.85, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         className="relative max-w-[345px] mx-auto rounded-[32px] vision-glass-card p-4 pt-5 pb-5 overflow-hidden shadow-xl"
       >
         {/* Top Tag & Counter */}
-        <motion.div
-          initial={{ opacity: 0, y: -6 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.28 }}
-          className="flex items-center justify-between px-3 mb-2"
-        >
+        <div className="flex items-center justify-between px-3 mb-2">
           <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/70 backdrop-blur-md border border-white/60 text-[11px] font-medium text-[#7A6A5E]">
             <Sparkles className="w-3 h-3 text-[#CFA4A4]" />
             <span>{outfits[currentIndex].label}</span>
@@ -127,11 +121,10 @@ export default function DressCodeSection() {
           <span className="text-[12px] font-serif font-medium text-[#9E8B7A] tracking-wider">
             {currentIndex + 1} / {outfits.length}
           </span>
-        </motion.div>
+        </div>
 
         {/* Carousel Image Stage with Gestures */}
         <div className="relative w-full h-[380px] sm:h-[410px] flex items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-b from-white/40 via-white/20 to-white/40 border border-white/60">
-          {/* Subtle Ambient Radial Highlight */}
           <div className="absolute inset-0 bg-gradient-radial from-rose-200/25 via-transparent to-transparent pointer-events-none" />
 
           <AnimatePresence initial={false} custom={direction}>
@@ -147,9 +140,9 @@ export default function DressCodeSection() {
               dragElastic={0.8}
               onDragEnd={(e, { offset, velocity }) => {
                 const swipe = Math.abs(offset.x) * velocity.x;
-                if (swipe < -8000 || offset.x < -60) {
+                if (swipe < -7000 || offset.x < -50) {
                   paginate(1);
-                } else if (swipe > 8000 || offset.x > 60) {
+                } else if (swipe > 7000 || offset.x > 50) {
                   paginate(-1);
                 }
               }}
@@ -158,47 +151,34 @@ export default function DressCodeSection() {
               <img
                 src={outfits[currentIndex].src}
                 alt={outfits[currentIndex].alt}
-                className="max-h-full max-w-full object-contain filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.14)] transition-transform duration-300 pointer-events-none"
+                className="max-h-full max-w-full object-contain filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.14)] pointer-events-none"
                 draggable={false}
+                loading="lazy"
               />
             </motion.div>
           </AnimatePresence>
 
           {/* Left Arrow Button */}
-          <motion.button
-            initial={{ opacity: 0, x: -8 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+          <button
             onClick={() => paginate(-1)}
             aria-label="Previous Outfit"
-            className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full vision-glass-circle flex items-center justify-center text-[#4A4039] hover:text-[#2C2724] active:scale-90 transition-all shadow-md focus:outline-none"
+            className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full vision-glass-circle flex items-center justify-center text-[#4A4039] hover:text-[#2C2724] active:scale-90 transition-all shadow-md focus:outline-none cursor-pointer"
           >
             <ChevronLeft className="w-5 h-5 -ml-0.5" />
-          </motion.button>
+          </button>
 
           {/* Right Arrow Button */}
-          <motion.button
-            initial={{ opacity: 0, x: 8 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+          <button
             onClick={() => paginate(1)}
             aria-label="Next Outfit"
-            className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full vision-glass-circle flex items-center justify-center text-[#4A4039] hover:text-[#2C2724] active:scale-90 transition-all shadow-md focus:outline-none"
+            className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full vision-glass-circle flex items-center justify-center text-[#4A4039] hover:text-[#2C2724] active:scale-90 transition-all shadow-md focus:outline-none cursor-pointer"
           >
             <ChevronRight className="w-5 h-5 -mr-0.5" />
-          </motion.button>
+          </button>
         </div>
 
         {/* Bottom Pagination Dots */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.35 }}
-          className="flex items-center justify-center gap-2 pt-4 pb-1"
-        >
+        <div className="flex items-center justify-center gap-2 pt-4 pb-1">
           {outfits.map((item, idx) => {
             const isActive = idx === currentIndex;
             return (
@@ -206,7 +186,7 @@ export default function DressCodeSection() {
                 key={item.id}
                 onClick={() => setSlide(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
-                className={`transition-all duration-300 rounded-full focus:outline-none ${
+                className={`transition-all duration-300 rounded-full focus:outline-none cursor-pointer ${
                   isActive
                     ? 'w-6 h-2 bg-gradient-to-r from-[#CFA4A4] to-[#B88585] shadow-[0_0_8px_rgba(207,164,164,0.6)]'
                     : 'w-2 h-2 bg-[#D8C7B5]/70 hover:bg-[#BFAEA2]'
@@ -214,7 +194,7 @@ export default function DressCodeSection() {
               />
             );
           })}
-        </motion.div>
+        </div>
       </motion.div>
     </section>
   );
