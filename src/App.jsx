@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Lenis from 'lenis';
 import { AnimatePresence, motion } from 'framer-motion';
 import IPhoneFrame from './components/IPhoneFrame';
@@ -13,6 +13,7 @@ import DressCodeSection from './components/DressCodeSection';
 import CountdownSection from './components/CountdownSection';
 import RsvpSection from './components/RsvpSection';
 import ThankYouSection from './components/ThankYouSection';
+import RsvpPage from './components/RsvpPage';
 import PetalsOverlay from './components/PetalsOverlay';
 import MusicFloatingButton from './components/MusicFloatingButton';
 
@@ -21,10 +22,62 @@ export default function App() {
   const lenisRef = useRef(null);
   const [petalsEnabled] = useState(true);
   const [isOpened, setIsOpened] = useState(false);
+  const [currentView, setCurrentView] = useState('home'); // 'home' | 'rsvp'
 
-  // Initialize Lenis Smooth Scroll only when Home Page is opened
+  // Navigation controller with target section auto-scroll support
+  const navigateTo = useCallback((view, targetSectionId = null) => {
+    setCurrentView(view);
+    if (view === 'home') {
+      if (!targetSectionId && window.location.hash) {
+        history.pushState(null, '', window.location.pathname + window.location.search);
+      }
+
+      if (targetSectionId) {
+        // Scroll smoothly to the target section (e.g. 'thankyou' at bottom of home)
+        setTimeout(() => {
+          const targetEl = document.getElementById(targetSectionId);
+          if (targetEl) {
+            if (lenisRef.current) {
+              lenisRef.current.scrollTo(targetEl, {
+                duration: 1.4,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+              });
+            } else {
+              targetEl.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+        }, 220);
+      }
+    } else {
+      window.location.hash = view;
+    }
+  }, []);
+
+  // Listen for hash changes (supporting browser back/forward and direct links)
   useEffect(() => {
-    if (!isOpened) return;
+    const handleHash = () => {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      if (hash === 'rsvp') {
+        setCurrentView('rsvp');
+      } else {
+        setCurrentView('home');
+      }
+    };
+
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
+  // Initialize Lenis Smooth Scroll only when Home Page is open and active
+  useEffect(() => {
+    if (!isOpened || currentView !== 'home') {
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+        lenisRef.current = null;
+      }
+      return;
+    }
 
     let lenis;
     let animId;
@@ -87,7 +140,7 @@ export default function App() {
         lenisRef.current = null;
       }
     };
-  }, [isOpened]);
+  }, [isOpened, currentView]);
 
   // Keep body overflow locked on mobile when opening screen is active
   useEffect(() => {
@@ -126,43 +179,70 @@ export default function App() {
           {/* Floating Rose Petals Animation */}
           <PetalsOverlay enabled={petalsEnabled} />
 
-          {/* Main Home Page Scroll View */}
-          <main
-            ref={scrollContainerRef}
-            className={`inner-app-scroll relative z-10 w-full h-full transition-opacity duration-700 ease-out ${
-              isOpened ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-            }`}
-          >
-            {/* Invitation Content Sections */}
-            <div className="relative z-10">
-              {/* Section 1: Hero & Welcome */}
-              <HeroSection />
+          {/* Dynamic Page Views (Home / RSVP Form Page) */}
+          <div className="relative z-10 w-full h-full">
+            <AnimatePresence mode="wait">
+              {currentView === 'home' && (
+                <motion.main
+                  key="home-view"
+                  ref={scrollContainerRef}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: isOpened ? 1 : 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                  className={`inner-app-scroll relative z-10 w-full h-full transition-opacity duration-700 ease-out ${
+                    isOpened ? 'pointer-events-auto' : 'pointer-events-none'
+                  }`}
+                >
+                  {/* Invitation Content Sections */}
+                  <div className="relative z-10">
+                    {/* Section 1: Hero & Welcome */}
+                    <HeroSection />
 
-              {/* Section 2: Events Timeline */}
-              <TimelineSection />
+                    {/* Section 2: Events Timeline */}
+                    <TimelineSection />
 
-              {/* Section 3: Gallery (3D Curved Perspective Carousel) */}
-              <GallerySection />
+                    {/* Section 3: Gallery (3D Curved Perspective Carousel) */}
+                    <GallerySection />
 
-              {/* Section 4: Venue Location & Map */}
-              <VenueSection />
+                    {/* Section 4: Venue Location & Map */}
+                    <VenueSection />
 
-              {/* Section 5: Wardrobe / Dress Code */}
-              <DressCodeSection />
+                    {/* Section 5: Wardrobe / Dress Code */}
+                    <DressCodeSection />
 
-              {/* Section 6: Live Countdown & Save The Date */}
-              <CountdownSection />
+                    {/* Section 6: Live Countdown & Save The Date */}
+                    <CountdownSection />
 
-              {/* Section 7: RSVP Form Module */}
-              <RsvpSection />
+                    {/* Section 7: RSVP Button Module */}
+                    <RsvpSection onOpenForm={() => navigateTo('rsvp')} />
 
-              {/* Section 8: Thank You (Organic Non-Card Design) */}
-              <ThankYouSection />
-            </div>
+                    {/* Section 8: Thank You Section (Bottom of Invitation) */}
+                    <ThankYouSection />
+                  </div>
+                </motion.main>
+              )}
+
+              {currentView === 'rsvp' && (
+                <motion.div
+                  key="rsvp-view"
+                  initial={{ opacity: 0, x: 25 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -25 }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                  className="relative z-10 w-full h-full"
+                >
+                  <RsvpPage
+                    onBack={() => navigateTo('home')}
+                    onSuccess={() => navigateTo('home', 'thankyou')}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* In-app Audio Trigger */}
             <MusicFloatingButton />
-          </main>
+          </div>
 
           {/* Opening Page Scratch Overlay (Cross-blend dissolves smoothly into Home Page) */}
           <AnimatePresence>

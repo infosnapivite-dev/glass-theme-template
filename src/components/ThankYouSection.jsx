@@ -4,7 +4,10 @@ import { Heart } from 'lucide-react';
 
 export default function ThankYouSection() {
   return (
-    <section className="relative w-full bg-transparent px-6 pt-6 pb-16 border-t border-[#EAE2D8]/40 overflow-hidden text-center">
+    <section
+      id="thankyou"
+      className="relative w-full bg-transparent px-6 pt-6 pb-16 border-t border-[#EAE2D8]/40 overflow-hidden text-center"
+    >
       {/* Soft Ambient Radial Glow */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#F4D8D8]/15 to-transparent pointer-events-none" />
 
@@ -51,18 +54,6 @@ export default function ThankYouSection() {
         </motion.div>
       </div>
 
-      {/* Heartfelt Gratitude Paragraph */}
-      <motion.div
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-20px' }}
-        transition={{ duration: 0.75, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 max-w-[310px] sm:max-w-[330px] mx-auto mb-8"
-      >
-        <p className="mobile-body-p1 text-[14px] leading-relaxed text-[#5A514B] font-light">
-          We are deeply grateful for your love, presence, and heartfelt blessings as we step into this sacred new chapter. Having you celebrate our union means the world to our hearts.
-        </p>
-      </motion.div>
 
       {/* Delicate Ornamental Line with Soft Heart Node */}
       <div className="relative z-10 flex items-center justify-center gap-3 max-w-[200px] mx-auto mb-7">
