@@ -24,15 +24,15 @@ export default function RsvpSection({ onOpenForm }) {
 
         {/* Section Header */}
         <div className="relative z-10 text-center mb-6 px-4">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 backdrop-blur-md border border-white/60 text-[11px] font-medium text-[#7A6A5E] mb-3 shadow-xs">
-            <Sparkles className="w-3 h-3 text-[#CFA4A4]" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/70 backdrop-blur-md border border-white/60 text-[11px] font-medium text-[#7A6A5E] mb-3 shadow-xs whitespace-nowrap">
+            <Sparkles className="w-3 h-3 text-[#CFA4A4] shrink-0" />
             <span>Join Our Celebration</span>
           </div>
 
-          <h2 className="mobile-section-title font-cormorant text-[42px] sm:text-[46px] font-medium tracking-[0.22em] uppercase text-[#2C2724] leading-none mb-2">
+          <h2 className="mobile-section-title font-cormorant text-[42px] sm:text-[46px] font-medium tracking-[0.22em] uppercase text-[#2C2724] leading-none mb-2 whitespace-nowrap">
             RSVP
           </h2>
-          <p className="mobile-section-subtitle text-[12px] uppercase tracking-[0.25em] text-[#9E8B7A] font-medium">
+          <p className="mobile-section-subtitle text-[11px] sm:text-[12px] uppercase tracking-[0.2em] text-[#9E8B7A] font-medium whitespace-nowrap">
             Kindly Respond • Celebrate With Us
           </p>
         </div>
@@ -51,24 +51,24 @@ export default function RsvpSection({ onOpenForm }) {
             </div>
 
             {/* Title & Welcoming Message */}
-            <h3 className="relative font-cormorant text-[22px] sm:text-[24px] font-medium text-[#1A1614] leading-snug mb-2">
+            <h3 className="relative font-cormorant text-[20px] sm:text-[23px] font-medium text-[#1A1614] leading-snug mb-2 whitespace-nowrap">
               We Request The Honor of Your Presence
             </h3>
 
-            <p className="relative text-[13.5px] leading-relaxed text-[#5A514B] font-light mb-5 max-w-[290px] mx-auto">
+            <p className="relative text-[13px] sm:text-[13.5px] leading-relaxed text-[#5A514B] font-light mb-5 max-w-[290px] mx-auto">
               Please let us know whether you will be celebrating with us in Udaipur. Kindly respond by{' '}
-              <span className="font-semibold text-[#8C6F4E]">November 15, 2025</span>.
+              <span className="font-semibold text-[#8C6F4E] whitespace-nowrap">November 15, 2025</span>.
             </p>
 
             {/* Quick Details Pill Summary */}
-            <div className="relative flex items-center justify-center gap-3 text-[11px] text-[#7A6E65] bg-white/50 rounded-2xl py-2 px-3 mb-6 border border-white/60">
+            <div className="relative flex items-center justify-center gap-3 text-[11px] text-[#7A6E65] bg-white/50 rounded-2xl py-2 px-3 mb-6 border border-white/60 whitespace-nowrap">
               <div className="flex items-center gap-1">
-                <Calendar className="w-3 h-3 text-[#C5A880]" />
+                <Calendar className="w-3 h-3 text-[#C5A880] shrink-0" />
                 <span>Nov 28, 2025</span>
               </div>
               <span className="text-[#C5A880]">•</span>
               <div className="flex items-center gap-1">
-                <MapPin className="w-3 h-3 text-[#CFA4A4]" />
+                <MapPin className="w-3 h-3 text-[#CFA4A4] shrink-0" />
                 <span>Udaipur</span>
               </div>
             </div>
@@ -81,7 +81,7 @@ export default function RsvpSection({ onOpenForm }) {
               <span>Fill Out RSVP Form</span>
             </button>
 
-            <p className="relative text-[10.5px] text-[#9E8B7A] tracking-wider uppercase mt-3 font-medium">
+            <p className="relative text-[10px] sm:text-[10.5px] text-[#9E8B7A] tracking-wider uppercase mt-3 font-medium whitespace-nowrap">
               Takes less than 1 minute • Opens in full page
             </p>
           </div>
